@@ -1,6 +1,14 @@
 interface Props {
   type: "priority" | "status";
-  value: "high" | "medium" | "low" | "In progress" | "Not started" | "Done";
+  value:
+    | "high"
+    | "medium"
+    | "low"
+    | "In progress"
+    | "Not started"
+    | "Done"
+    | "not-started"
+    | "in-progress";
 }
 
 export default function DataPill({ type, value }: Props) {
@@ -19,15 +27,15 @@ export default function DataPill({ type, value }: Props) {
       </div>
     );
   } else {
-    value == "In progress"
+    value == "In progress" || value == "in-progress"
       ? (color = "bg-yellow-400")
-      : value == "Not started"
+      : value === "Not started" || value === "not-started"
       ? (color = "bg-red-400")
       : (color = "bg-green-400");
 
     return (
       <div className={`px-3 py-[1px] ${color} rounded-md w-fit text-gray-100`}>
-        {value}
+        {value.split("-").join(" ").toUpperCase()}
       </div>
     );
   }
